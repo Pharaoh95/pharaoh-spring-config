@@ -3,6 +3,7 @@
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
+    <display-name>springconfig</display-name>
     <!-- spring-dispatcher-start -->
     <servlet>
         <servlet-name>spring</servlet-name>
@@ -11,25 +12,12 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:spring/spring-web.xml</param-value>
         </init-param>
-        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!-- spring-dispatcher-end -->
-
-    <!-- spring-context-listener-start -->
-    <listener>
-        <listener-class>
-            org.springframework.web.context.ContextLoaderListener
-        </listener-class>
-    </listener>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring/spring-*.xml</param-value>
-    </context-param>
-    <!-- spring-context-listener-end -->
 
     <!-- spring-encoding-filter-start -->
     <filter>
@@ -45,4 +33,16 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!-- spring-encoding-filter-end -->
+
+    <!-- spring-context-listener-start -->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/spring-*.xml</param-value>
+    </context-param>
+    <!-- spring-context-listener-end -->
 </web-app>
