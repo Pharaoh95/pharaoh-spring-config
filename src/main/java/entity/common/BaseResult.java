@@ -19,10 +19,10 @@ public class BaseResult {
 
     public void setData(Object data) {
         this.data = data;
+        this.code = "1";
         if (data == null) {
             this.code = "0";
         }
-        this.code = "1";
     }
 
     public String getInfo() {

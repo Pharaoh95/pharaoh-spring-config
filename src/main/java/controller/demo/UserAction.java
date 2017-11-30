@@ -4,30 +4,22 @@ import dao.demo.UserDao;
 import entity.common.BaseResult;
 import entity.demo.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/user")
+@RestController
 public class UserAction {
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping("/pharaoh")
-    @ResponseBody
-    public BaseResult showMe() {
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public BaseResult getOne(@PathVariable String id) {
         BaseResult brs = new BaseResult();
-        User me = new User("123123", "Pharaoh");
+        User me = new User(id, "Pharaoh");
         brs.setData(me);
-        return brs;
-    }
-
-    @RequestMapping("/all")
-    @ResponseBody
-    public BaseResult getAll() {
-        BaseResult brs = new BaseResult();
-        brs.setData(userDao.findAllUsers());
+//        userDao.addUser(id, "Pharaoh");
         return brs;
     }
 }
