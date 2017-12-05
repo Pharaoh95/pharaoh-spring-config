@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-public class UsersAction {
+public class AdminUsersAction {
     @Autowired
     private UserDao userDao;
 

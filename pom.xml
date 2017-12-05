@@ -10,11 +10,39 @@
     <packaging>war</packaging>
     <name>pharaoh-spring-config Maven Webapp</name>
     <url>http://maven.apache.org</url>
+    <!-- multi-env-config-->
+    <profiles>
+        <!--d环境，表示开发环境-->
+        <profile>
+            <id>env_d</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+            <!--默认激活-->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <!--c环境，表示预生产环境-->
+        <profile>
+            <id>env_c</id>
+            <properties>
+                <env>test</env>
+            </properties>
+        </profile>
+        <!--a环境，表示生产环境-->
+        <profile>
+            <id>env_a</id>
+            <properties>
+                <env>prod</env>
+            </properties>
+        </profile>
+    </profiles>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- base -->
-        <junit.version>4.11</junit.version>
+        <junit.version>4.12</junit.version>
         <servlet.version>3.0.1</servlet.version>
         <mysql.driver.version>5.1.38</mysql.driver.version>
         <log4j.version>1.2.17</log4j.version>
@@ -51,6 +79,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
+            <scope>test</scope>
         </dependency>
         <!-- jackson(spring) relative -->
         <dependency>
@@ -93,6 +122,12 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>${servlet.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.driver.version}</version>
         </dependency>
 
         <!--log4j-->

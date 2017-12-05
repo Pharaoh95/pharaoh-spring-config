@@ -34,7 +34,6 @@ public class UserDao {
     @Transactional
     public boolean addUser(String id, String name) {
         boolean rs = false;
-        System.out.println(id);
         template.update("INSERT INTO t_user(id, NAME)VALUES(?, ?)", id, name);
 //        int i = 1 / 0; // Transactional test
         return rs;

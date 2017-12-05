@@ -19,7 +19,7 @@ public class UserAction {
         BaseResult brs = new BaseResult();
         User me = new User(id, "Pharaoh");
         brs.setData(me);
-//        userDao.addUser(id, "Pharaoh");
+        userDao.addUser(id, "Pharaoh");
         return brs;
     }
 }

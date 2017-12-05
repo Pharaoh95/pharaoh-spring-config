@@ -6,8 +6,8 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
-    <context:property-placeholder location="classpath:jdbc/mysql-test.properties"/>
-    <context:property-placeholder location="classpath:jdbc/orcl-test.properties"/>
+    <context:property-placeholder location="classpath:envs/dev/mysql.properties"/>
+    <context:property-placeholder location="classpath:envs/dev/orcl.properties"/>
     <context:component-scan base-package="dao"/>
     <!--hikari config-->
     <bean id="dataSourceHikari" class="com.zaxxer.hikari.HikariDataSource">
