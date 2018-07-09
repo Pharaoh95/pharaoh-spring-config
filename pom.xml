@@ -10,34 +10,7 @@
     <packaging>war</packaging>
     <name>pharaoh-spring-config Maven Webapp</name>
     <url>http://maven.apache.org</url>
-    <!-- multi-env-config-->
-    <profiles>
-        <!--d环境，表示开发环境-->
-        <profile>
-            <id>env_d</id>
-            <properties>
-                <env>dev</env>
-            </properties>
-            <!--默认激活-->
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <!--c环境，表示预生产环境-->
-        <profile>
-            <id>env_c</id>
-            <properties>
-                <env>test</env>
-            </properties>
-        </profile>
-        <!--a环境，表示生产环境-->
-        <profile>
-            <id>env_a</id>
-            <properties>
-                <env>prod</env>
-            </properties>
-        </profile>
-    </profiles>
+
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -86,23 +59,6 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- json-jackson -->
-        <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--<artifactId>jackson-core</artifactId>-->
-            <!--<version>${jackson.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--<artifactId>jackson-databind</artifactId>-->
-            <!--<version>${jackson.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--<artifactId>jackson-annotations</artifactId>-->
-            <!--<version>${jackson.version}</version>-->
-        <!--</dependency>-->
-        <!-- json-gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -174,5 +130,56 @@
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <build>
         <finalName>pharaoh-spring-config</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <!-- 先将多环境配置文件全部排除 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <!-- 因时而异 -->
+                    <exclude>envs/test/**</exclude>
+                    <exclude>envs/prod/**</exclude>
+                    <exclude>envs/dev/**</exclude>
+                </excludes>
+            </resource>
+            <!-- 再将对应的环境配置引入 -->
+            <resource>
+                <directory>src/main/resources/envs/${profiles.active}</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+            <!--默认激活-->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>test</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <env>prod</env>
+            </properties>
+        </profile>
+    </profiles>
 </project>
