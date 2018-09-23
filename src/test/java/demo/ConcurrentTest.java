@@ -22,6 +22,7 @@ public class ConcurrentTest implements Runnable {
 
     @Test
     public void testCountDownLatch() throws InterruptedException {
+        // test git link
         for (int i = 0; i < 10; i++) {
             new Thread(this).start();
         }
